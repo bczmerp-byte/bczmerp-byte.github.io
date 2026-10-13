@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BCZM ERP · Sistema contable para empresas peruanas | SIRE, detracciones, planilla</title>
+<meta name="description" content="BCZM ERP es un sistema contable hecho en Lima para empresas peruanas: contabilidad, SIRE RVIE y RCE, pago masivo de detracciones, guías de remisión, planilla y tesorería. Se instala en tu oficina y trabaja en red.">
+<meta name="keywords" content="ERP contable Perú, sistema contable SUNAT, SIRE, RVIE, RCE, detracciones pago masivo, software contable Lima, planilla, PLE, PDT 621, BCZM ERP">
+<meta name="author" content="BCZM SOLUCIONES CONTABLES S.A.C.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0B1626">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_PE">
+<meta property="og:title" content="BCZM ERP · Sistema contable para empresas peruanas">
+<meta property="og:description" content="Contabilidad, SIRE, detracciones, planilla y tesorería en un solo sistema. Se instala en tu oficina y tus datos se quedan contigo.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1626'/%3E%3Crect width='64' height='8' fill='%23D9A93F'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='19' fill='white' text-anchor='middle'%3EBCZM%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"BCZM ERP","applicationCategory":"BusinessApplication","operatingSystem":"Windows 10, Windows 11","description":"Sistema contable para empresas peruanas: contabilidad, SIRE, detracciones, guías de remisión, planilla y tesorería.","inLanguage":"es-PE","author":{"@type":"Organization","name":"BCZM SOLUCIONES CONTABLES S.A.C."},"provider":{"@type":"Organization","name":"BCZM SOLUCIONES CONTABLES S.A.C.","email":"bczm.erp@gmail.com","telephone":"+51 934 760 023","address":{"@type":"PostalAddress","addressLocality":"Lima","addressCountry":"PE"}}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: héroe azul noche a todo el ancho con ventana del ERP · módulos en rejilla · ciclo del mes en línea de tiempo · seguridad · preguntas · contacto */
+:root{
+  --noche:#0B1626; --noche-2:#13233A; --noche-3:#1C3150;
+  --oro:#D9A93F; --oro-claro:#F2C96A;
+  --bg:#F4F6FA; --surface:#FFFFFF; --surface-2:#EEF2F8;
+  --fg:#0F1B2D; --muted:#56667C; --line:#DCE3EE;
+  --accent:#B9861F; --ok:#1F8A5B; --warn:#B45309;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Hanken Grotesk","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#08111E; --surface:#101D30; --surface-2:#15253B; --fg:#E7EDF5; --muted:#9AABC0; --line:#22344D; --accent:#E2B453; --ok:#3DBB84; --warn:#F0A14A; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#08111E; --surface:#101D30; --surface-2:#15253B; --fg:#E7EDF5; --muted:#9AABC0; --line:#22344D; --accent:#E2B453; --ok:#3DBB84; --warn:#F0A14A; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+p{margin:0}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px;border-radius:6px}
+
+/* ---------- barra superior ---------- */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(11,22,38,.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font:800 19px/1 var(--display);letter-spacing:-.01em}
+.logo{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:#fff;color:var(--noche);font:800 11px/1 var(--display);letter-spacing:-.02em;position:relative;overflow:hidden}
+.logo::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--oro)}
+.logo span{color:var(--oro);margin:0 1px}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{color:#C9D5E4;text-decoration:none;font-weight:500;font-size:15px}
+.nav a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:12px 20px;font:700 15px/1 var(--body);text-decoration:none;cursor:pointer;border:0;transition:transform .15s,box-shadow .15s,background .15s}
+.btn-oro{background:var(--oro);color:#1A1406;box-shadow:0 6px 20px -6px rgba(217,169,63,.6)}
+.btn-oro:hover{background:var(--oro-claro);transform:translateY(-1px)}
+.btn-linea{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}
+.btn-linea:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.btn svg{width:18px;height:18px}
+.top .btn{padding:10px 16px;font-size:14px}
+@media (max-width:860px){.nav{display:none}.top .btn{margin-left:auto}}
+
+/* ---------- héroe ---------- */
+.hero{background:radial-gradient(900px 500px at 85% -10%,rgba(217,169,63,.20),transparent 60%),radial-gradient(700px 500px at 0% 110%,rgba(64,120,190,.25),transparent 60%),var(--noche);color:#fff;padding-block:72px 88px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#000 30%,transparent);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.02fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero .eyebrow{color:var(--oro-claro)}
+.hero h1{font-size:clamp(38px,5.6vw,64px);font-weight:800;letter-spacing:-.025em;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--oro);position:relative;white-space:nowrap}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.12em;background:var(--oro);opacity:.35;border-radius:4px}
+.hero .lead{font-size:clamp(17px,1.6vw,19px);color:#C9D5E4;margin-top:22px;max-width:34em}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.sellos{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:34px;font-size:14px;color:#A9B8CB}
+.sellos span{display:inline-flex;align-items:center;gap:7px}
+.sellos svg{width:16px;height:16px;stroke:var(--oro)}
+@media (max-width:960px){.hero .wrap{grid-template-columns:1fr;gap:44px}.hero{padding-block:48px 64px}}
+
+/* ventana del ERP */
+.ventana{background:#F7F9FC;color:#0F1B2D;border-radius:16px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.12);overflow:hidden;transform:perspective(1400px) rotateY(-6deg) rotateX(2deg);transition:transform .5s}
+.ventana:hover{transform:none}
+@media (max-width:960px){.ventana{transform:none}}
+.v-bar{display:flex;align-items:center;gap:8px;background:#0F1B2D;padding:10px 14px;color:#C9D5E4;font:600 12px/1 var(--body)}
+.v-bar i{width:10px;height:10px;border-radius:50%;background:#33475F}
+.v-bar i:first-child{background:#E86A5B}.v-bar i:nth-child(2){background:#E8B84B}.v-bar i:nth-child(3){background:#4CB27B}
+.v-bar b{margin-left:10px;font-weight:600}
+.v-bar small{margin-left:auto;font:500 11px var(--mono);color:#8FA2B9}
+.v-iconos{display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid #E1E6EE;background:#fff;overflow:hidden}
+.v-iconos span{font:600 11px/1 var(--body);color:#5B6B80;padding:7px 9px;border-radius:7px;white-space:nowrap}
+.v-iconos span.on{background:#0F1B2D;color:#fff}
+.v-cuerpo{padding:16px;display:grid;gap:12px}
+.v-tit{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.v-tit b{font:700 15px var(--display)}
+.v-tit small{font:500 11px var(--mono);color:#7A8BA0}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:#fff;border:1px solid #E1E6EE;border-radius:10px;padding:10px 11px;min-width:0}
+.kpi small{display:block;font-size:11px;color:#5B6B80;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi b{display:block;font:700 18px/1.2 var(--mono);margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi em{font-style:normal;font-size:11px;font-weight:600}
+.verde{color:#1F8A5B}.ambar{color:#B45309}
+.lista{background:#fff;border:1px solid #E1E6EE;border-radius:10px;overflow:hidden}
+.fila{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:9px 12px;font-size:12.5px;border-top:1px solid #EEF1F6}
+.fila:first-child{border-top:0}
+.pill{font:600 10.5px/1 var(--body);padding:5px 8px;border-radius:99px;white-space:nowrap}
+.p-ok{background:#E3F4EB;color:#1F7A50}.p-warn{background:#FCEFD9;color:#9A4A07}.p-info{background:#E5EDF8;color:#2A5C8A}
+.fila span:nth-child(2){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fila code{font:500 11.5px var(--mono);color:#5B6B80}
+.txt{background:#0F1B2D;color:#9FE0BC;font:500 11px/1.6 var(--mono);border-radius:10px;padding:10px 12px;overflow:hidden;white-space:nowrap}
+.txt .c{color:#8FA2B9}
+.txt .cursor{display:inline-block;width:7px;height:13px;background:#9FE0BC;vertical-align:-2px;animation:parpadeo 1s steps(1) infinite}
+@keyframes parpadeo{50%{opacity:0}}
+.ejemplo{font:500 11px var(--mono);color:#8FA2B9;text-align:right;margin-top:10px}
+@media (max-width:480px){.kpis{grid-template-columns:1fr 1fr}.kpi:last-child{grid-column:span 2}.v-iconos span:nth-child(n+5){display:none}}
+
+/* ---------- franja ---------- */
+.franja{background:var(--surface);border-bottom:1px solid var(--line)}
+.franja .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.franja div{padding:26px 18px;border-left:1px solid var(--line)}
+.franja div:first-child{border-left:0}
+.franja b{display:block;font:800 30px/1 var(--display);letter-spacing:-.02em;color:var(--fg)}
+.franja span{display:block;margin-top:6px;color:var(--muted);font-size:14px}
+@media (max-width:760px){.franja .wrap{grid-template-columns:1fr 1fr}.franja div:nth-child(3){border-left:0}.franja div:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* ---------- secciones ---------- */
+section{padding-block:88px}
+.cab{max-width:720px;margin-bottom:44px}
+.cab h2{font-size:clamp(30px,3.8vw,44px);font-weight:800;letter-spacing:-.02em;margin-top:12px}
+.cab p{color:var(--muted);font-size:18px;margin-top:14px}
+@media (max-width:640px){section{padding-block:60px}}
+
+/* módulos */
+.mods{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:1020px){.mods{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.mods{grid-template-columns:1fr}}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,transform .2s,box-shadow .2s}
+.mod:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(15,27,45,.35)}
+.mod .ic{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:var(--noche);color:var(--oro)}
+.mod .ic svg{width:22px;height:22px}
+.mod h3{font-size:19px;font-weight:700;margin-top:4px}
+.mod p{color:var(--muted);font-size:14.5px}
+.mod ul{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.mod li{font-size:12.5px;font-weight:600;background:var(--surface-2);color:var(--fg);padding:5px 9px;border-radius:7px}
+.mod.destacado{grid-column:span 2;background:var(--noche);color:#fff;border-color:var(--noche);position:relative;overflow:hidden}
+.mod.destacado::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(217,169,63,.28),transparent 70%)}
+.mod.destacado .ic{background:var(--oro);color:var(--noche)}
+.mod.destacado p{color:#B9C6D6}
+.mod.destacado li{background:rgba(255,255,255,.08);color:#E7EDF5}
+@media (max-width:560px){.mod.destacado{grid-column:auto}}
+
+/* ciclo del mes */
+.mes{background:var(--surface);border-block:1px solid var(--line)}
+.linea{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;counter-reset:paso;position:relative}
+.linea::before{content:"";position:absolute;left:22px;right:22px;top:22px;height:2px;background:linear-gradient(90deg,var(--oro),var(--line))}
+.paso{position:relative;display:flex;flex-direction:column;gap:10px;min-width:0}
+.paso .n{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--noche);color:var(--oro);font:700 15px var(--mono);box-shadow:0 0 0 6px var(--surface);position:relative}
+.paso h3{font-size:17px;font-weight:700;margin-top:6px}
+.paso p{color:var(--muted);font-size:14.5px}
+.paso code{font:500 12px var(--mono);color:var(--accent)}
+@media (max-width:900px){.linea{grid-template-columns:1fr;gap:26px}.linea::before{left:22px;right:auto;top:22px;bottom:22px;width:2px;height:auto;background:linear-gradient(180deg,var(--oro),var(--line))}.paso{display:grid;grid-template-columns:46px 1fr;column-gap:16px}.paso .n{grid-row:span 2}.paso h3{margin-top:0}}
+
+/* cómo funciona en la oficina */
+.red{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media (max-width:900px){.red{grid-template-columns:1fr}}
+.puntos{display:grid;gap:18px;margin-top:8px}
+.punto{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.punto svg{width:24px;height:24px;stroke:var(--accent);margin-top:2px}
+.punto b{display:block;font-weight:700}
+.punto span{color:var(--muted);font-size:15px}
+.diagrama{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.diagrama svg{width:100%;height:auto;display:block}
+.d-linea{stroke:var(--accent);stroke-width:2;stroke-dasharray:5 6;fill:none;animation:flujo 1.4s linear infinite}
+@keyframes flujo{to{stroke-dashoffset:-22}}
+.d-caja{fill:var(--surface-2);stroke:var(--line)}
+.d-srv{fill:var(--noche);stroke:var(--oro);stroke-width:1.5}
+.d-t{fill:var(--fg);font:600 13px var(--body)}
+.d-s{fill:var(--muted);font:500 11px var(--mono)}
+.d-tw{fill:#fff;font:700 14px var(--body)}
+.d-so{fill:var(--oro-claro);font:500 11px var(--mono)}
+.d-ic{fill:none;stroke:var(--fg);stroke-width:1.6}
+
+/* seguridad */
+.seg{background:var(--noche);color:#fff}
+.seg .cab p{color:#B9C6D6}
+.seg .eyebrow{color:var(--oro-claro)}
+.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden}
+@media (max-width:900px){.segs{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.segs{grid-template-columns:1fr}}
+.segs div{background:var(--noche-2);padding:26px;display:flex;flex-direction:column;gap:8px}
+.segs svg{width:26px;height:26px;stroke:var(--oro)}
+.segs b{font:700 17px var(--display);margin-top:4px}
+.segs span{color:#B9C6D6;font-size:14.5px}
+
+/* preguntas */
+.faq{display:grid;grid-template-columns:1fr 1.5fr;gap:48px}
+@media (max-width:900px){.faq{grid-template-columns:1fr;gap:8px}}
+details{border-bottom:1px solid var(--line);padding-block:18px}
+details:first-child{border-top:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;font:700 17px var(--body)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:500 24px/1 var(--mono);color:var(--accent);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--muted);margin-top:10px;max-width:60ch}
+
+/* contacto */
+.contacto{padding-block:0 88px}
+.cta-final{background:linear-gradient(120deg,var(--noche) 0%,var(--noche-3) 100%);color:#fff;border-radius:24px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+.cta-final::before{content:"";position:absolute;width:420px;height:420px;right:-120px;bottom:-200px;border-radius:50%;background:radial-gradient(circle,rgba(217,169,63,.35),transparent 70%)}
+@media (max-width:900px){.cta-final{grid-template-columns:1fr}}
+.cta-final h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:-.02em}
+.cta-final p{color:#C9D5E4;margin-top:14px;font-size:17px}
+.datos{display:grid;gap:10px;position:relative;z-index:1}
+.dato{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;min-width:0}
+.dato svg{width:20px;height:20px;stroke:var(--oro);flex:none}
+.dato div{min-width:0;flex:1}
+.dato small{display:block;color:#9FB0C5;font-size:12px}
+.dato b{display:block;font-weight:600;overflow-wrap:anywhere;user-select:all}
+.copiar{background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:7px 10px;font:600 12px var(--body);cursor:pointer;flex:none}
+.copiar:hover{border-color:var(--oro);color:var(--oro-claro)}
+.datos .btn{justify-content:center;margin-top:6px}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:center}
+footer .marca{color:var(--fg)}
+footer .logo{background:var(--noche);color:#fff}
+</style>
+
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="#inicio" aria-label="BCZM ERP, inicio"><span class="logo">BC<span>|</span>ZM</span>BCZM ERP</a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#funciones">Funciones</a>
+      <a href="#mes">Tu mes contable</a>
+      <a href="#oficina">En tu oficina</a>
+      <a href="#seguridad">Seguridad</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-oro" href="https://wa.me/51934760023?text=Hola%2C%20quiero%20una%20demostraci%C3%B3n%20de%20BCZM%20ERP" target="_blank" rel="noopener">Pide una demo</a>
+  </div>
+</header>
+
+<main id="inicio">
+<section class="hero" aria-labelledby="h-hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Sistema contable para empresas peruanas</div>
+      <h1 id="h-hero">Tu contabilidad, <em>al día con SUNAT</em>, sin pelearte con el Excel.</h1>
+      <p class="lead">BCZM ERP junta contabilidad, SIRE, detracciones, planilla y tesorería en un solo sistema. Se instala en tu oficina, trabaja en red y tus datos se quedan contigo.</p>
+      <div class="cta">
+        <a class="btn btn-oro" href="https://wa.me/51934760023?text=Hola%2C%20quiero%20una%20demostraci%C3%B3n%20de%20BCZM%20ERP" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>
+          Pide una demo por WhatsApp</a>
+        <a class="btn btn-linea" href="#funciones">Ver qué incluye</a>
+      </div>
+      <div class="sellos">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SIRE RVIE y RCE</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Varias empresas</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hecho en Lima</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="ventana" role="img" aria-label="Pantalla de ejemplo de BCZM ERP con el resumen del mes">
+        <div class="v-bar"><i></i><i></i><i></i><b>BCZM ERP</b><small>Comercial Andina S.A.C.</small></div>
+        <div class="v-iconos"><span class="on">Resumen</span><span>Contabilidad</span><span>SUNAT</span><span>Ventas</span><span>Compras</span><span>Tesorería</span><span>Planilla</span></div>
+        <div class="v-cuerpo">
+          <div class="v-tit"><b>Resumen de septiembre 2026</b><small>RUC 20601234567</small></div>
+          <div class="kpis">
+            <div class="kpi"><small>IGV por pagar</small><b>S/ 12,480</b><em class="ambar">vence 17 oct</em></div>
+            <div class="kpi"><small>Ventas del mes</small><b>S/ 186,240</b><em class="verde">+8.4% vs ago</em></div>
+            <div class="kpi"><small>Detracciones</small><b>6</b><em class="ambar">por depositar</em></div>
+          </div>
+          <div class="lista">
+            <div class="fila"><span class="pill p-ok">Aceptada</span><span>Propuesta RVIE 2026-09 en SUNAT</span><code>412 cpe</code></div>
+            <div class="fila"><span class="pill p-ok">Aceptada</span><span>Propuesta RCE 2026-09 en SUNAT</span><code>298 cpe</code></div>
+            <div class="fila"><span class="pill p-warn">Pendiente</span><span>PDT 621 · período 09/2026</span><code>17/10</code></div>
+            <div class="fila"><span class="pill p-info">Emitida</span><span>Guía de remisión T001-00000148</span><code>Nubefact</code></div>
+          </div>
+          <div class="txt"><span class="c"># D20601234567260003.txt · pago masivo de detracciones</span><br>*20601234567COMERCIAL ANDINA SAC  2600030000013450<span class="cursor"></span></div>
+        </div>
+      </div>
+      <p class="ejemplo">Pantalla de ejemplo · datos ficticios</p>
+    </div>
+  </div>
+</section>
+
+<div class="franja">
+  <div class="wrap">
+    <div><b>8</b><span>módulos en un solo sistema</span></div>
+    <div><b>SIRE</b><span>propuestas de compras y ventas</span></div>
+    <div><b>1 clic</b><span>para actualizar a la última versión</span></div>
+    <div><b>100%</b><span>de tus datos en tu oficina</span></div>
+  </div>
+</div>
+
+<section id="funciones" aria-labelledby="h-func">
+  <div class="wrap">
+    <div class="cab">
+      <div class="eyebrow">Funciones</div>
+      <h2 id="h-func">Todo lo que pide el mes contable, en un mismo lugar</h2>
+      <p>Pensado desde el escritorio de un contador peruano: los formatos, plazos y registros de SUNAT ya vienen incluidos.</p>
+    </div>
+    <div class="mods">
+      <article class="mod destacado">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg></div>
+        <h3>SUNAT y tributos</h3>
+        <p>Descarga y acepta las propuestas del SIRE, cruza compras y ventas, arma tus libros electrónicos y prepara tus declaraciones.</p>
+        <ul><li>SIRE RVIE / RCE</li><li>Libros electrónicos PLE</li><li>PDT 621</li><li>Renta anual</li><li>DAOT</li><li>No domiciliados</li><li>Validar comprobantes</li></ul>
+      </article>
+      <article class="mod">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4zM4 9h16M9 9v11"/></svg></div>
+        <h3>Contabilidad</h3>
+        <p>Asientos automáticos desde compras, ventas y bancos.</p>
+        <ul><li>Libro diario</li><li>Libro mayor</li><li>Reportes</li></ul>
+      </article>
+      <article class="mod">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M7 8h7.5a3 3 0 0 1 0 6H8"/></svg></div>
+        <h3>Detracciones</h3>
+        <p>Arma el TXT de pago masivo para SUNAT y registra las constancias.</p>
+        <ul><li>Pago masivo</li><li>Retenciones</li><li>Percepciones</li></ul>
+      </article>
+      <article class="mod">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h5"/></svg></div>
+        <h3>Ventas y compras</h3>
+        <p>Comprobantes, guías de remisión electrónicas y descarga de PDF, XML y CDR.</p>
+        <ul><li>Guías de remisión</li><li>Cobranzas</li><li>Recibos por honorarios</li></ul>
+      </article>
+      <article class="mod">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h20v12H2zM2 11h20M6 15h4"/></svg></div>
+        <h3>Tesorería</h3>
+        <p>Caja, bancos y conciliación, con el tipo de cambio SUNAT del día.</p>
+        <ul><li>Conciliación</li><li>Pagos por banco</li><li>Flujo de caja</li></ul>
+      </article>
+      <article class="mod">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/></svg></div>
+        <h3>Planilla</h3>
+        <p>Remuneraciones, horas extras, asignación familiar y recibos.</p>
+        <ul><li>Personal</li><li>Horas extras</li><li>Recibos</li></ul>
+      </article>
+      <article class="mod">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4zM3 7v10l9 4 9-4V7M12 11v10"/></svg></div>
+        <h3>Inventario</h3>
+        <p>Entradas, salidas y kardex valorizado por producto.</p>
+        <ul><li>Kardex</li><li>Almacenes</li></ul>
+      </article>
+      <article class="mod">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h18v12H3zM8 8V5h8v3"/></svg></div>
+        <h3>Comercial</h3>
+        <p>Cotizaciones, órdenes, contratos y proyectos.</p>
+        <ul><li>Cotizaciones</li><li>Órdenes</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="mes" id="mes" aria-labelledby="h-mes">
+  <div class="wrap">
+    <div class="cab">
+      <div class="eyebrow">Tu mes contable</div>
+      <h2 id="h-mes">Del cierre a la declaración, paso a paso</h2>
+      <p>Así se ve un mes normal dentro de BCZM ERP.</p>
+    </div>
+    <div class="linea">
+      <div class="paso"><div class="n">01</div><h3>Descarga el SIRE</h3><p>Trae las propuestas de ventas y compras directo de SUNAT. <code>RVIE · RCE</code></p></div>
+      <div class="paso"><div class="n">02</div><h3>Cruza y corrige</h3><p>Compara la propuesta con tus registros y marca las diferencias antes de aceptar.</p></div>
+      <div class="paso"><div class="n">03</div><h3>Paga detracciones</h3><p>Genera el TXT de pago masivo y registra las constancias. <code>D + RUC + lote</code></p></div>
+      <div class="paso"><div class="n">04</div><h3>Revisa las alertas</h3><p>La campana te avisa de vencimientos, cobranzas y documentos con problema.</p></div>
+      <div class="paso"><div class="n">05</div><h3>Declara</h3><p>Prepara el PDT 621 según el cronograma del último dígito de tu RUC.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="oficina" aria-labelledby="h-ofi">
+  <div class="wrap red">
+    <div>
+      <div class="eyebrow">En tu oficina</div>
+      <h2 id="h-ofi" style="font-size:clamp(30px,3.8vw,44px);font-weight:800;letter-spacing:-.02em;margin:12px 0 22px">Una PC es el servidor; las demás se conectan solas</h2>
+      <div class="puntos">
+        <div class="punto"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Se instala en minutos</b><span>Un instalador para el servidor y otro para cada PC. El servidor arranca solo cuando se prende la computadora.</span></div></div>
+        <div class="punto"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Trabajan varios a la vez</b><span>Cada usuario con su cuenta y sus permisos, sobre las mismas empresas.</span></div></div>
+        <div class="punto"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Siempre en la última versión</b><span>Cuando hay mejoras, el panel te avisa y se actualiza con un clic.</span></div></div>
+      </div>
+    </div>
+    <div class="diagrama">
+      <svg viewBox="0 0 460 300" role="img" aria-label="Diagrama: la PC servidor en el centro conectada a tres PCs de la oficina y a SUNAT">
+        <path class="d-linea" d="M230 150 L80 60"/><path class="d-linea" d="M230 150 L80 240"/><path class="d-linea" d="M230 150 L380 240"/><path class="d-linea" d="M230 150 L380 60"/>
+        <rect class="d-srv" x="160" y="112" width="140" height="76" rx="14"/>
+        <text class="d-tw" x="230" y="146" text-anchor="middle">Servidor BCZM</text>
+        <text class="d-so" x="230" y="168" text-anchor="middle">base de datos</text>
+        <g><rect class="d-caja" x="20" y="30" width="120" height="60" rx="12"/><text class="d-t" x="80" y="57" text-anchor="middle">Contabilidad</text><text class="d-s" x="80" y="75" text-anchor="middle">PC 1</text></g>
+        <g><rect class="d-caja" x="20" y="210" width="120" height="60" rx="12"/><text class="d-t" x="80" y="237" text-anchor="middle">Tesorería</text><text class="d-s" x="80" y="255" text-anchor="middle">PC 2</text></g>
+        <g><rect class="d-caja" x="320" y="210" width="120" height="60" rx="12"/><text class="d-t" x="380" y="237" text-anchor="middle">Gerencia</text><text class="d-s" x="380" y="255" text-anchor="middle">PC 3</text></g>
+        <g><rect class="d-caja" x="320" y="30" width="120" height="60" rx="12"/><text class="d-t" x="380" y="57" text-anchor="middle">SUNAT</text><text class="d-s" x="380" y="75" text-anchor="middle">SIRE · CPE</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="seg" id="seguridad" aria-labelledby="h-seg">
+  <div class="wrap">
+    <div class="cab">
+      <div class="eyebrow">Seguridad</div>
+      <h2 id="h-seg">Tus datos contables no salen de tu oficina</h2>
+      <p>La información de tus empresas se guarda en tu propio servidor, no en una nube ajena.</p>
+    </div>
+    <div class="segs">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16v13H4zM8 7V4h8v3"/></svg><b>Respaldos automáticos</b><span>Copias automáticas de la base de datos y una copia adicional fuera de la PC.</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg><b>Doble verificación</b><span>Además de la contraseña, un código del celular para el administrador.</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><b>Claves SOL protegidas</b><span>Las credenciales de SUNAT se guardan cifradas en el servidor.</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 11l2 2 3-4"/></svg><b>Usuarios y permisos</b><span>Cada persona ve y hace solo lo que le corresponde.</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Actualizaciones firmadas</b><span>Cada actualización se comprueba antes de instalarse y siempre se puede volver atrás.</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg><b>Historial de cambios</b><span>El servidor registra quién ingresó y qué se actualizó.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="preguntas" aria-labelledby="h-faq">
+  <div class="wrap faq">
+    <div class="cab" style="margin:0">
+      <div class="eyebrow">Preguntas frecuentes</div>
+      <h2 id="h-faq">Lo que suelen preguntar</h2>
+      <p>¿Tienes otra duda? Escríbenos por WhatsApp.</p>
+    </div>
+    <div>
+      <details open><summary>¿Necesito internet para usarlo?</summary><p>Para trabajar dentro de la oficina basta con la red local. El internet se usa para conectarse con SUNAT (SIRE, comprobantes, tipo de cambio) y para recibir actualizaciones.</p></details>
+      <details><summary>¿En qué computadoras funciona?</summary><p>En computadoras con Windows 10 u 11. Una de ellas hace de servidor y las demás se instalan como cliente.</p></details>
+      <details><summary>¿Puedo llevar varias empresas?</summary><p>Sí. Cada empresa tiene su propia contabilidad, sus registros y su configuración de SUNAT. La cantidad de empresas y usuarios depende de tu licencia.</p></details>
+      <details><summary>¿Cómo se actualiza?</summary><p>El Panel del servidor te avisa cuando hay una versión nueva y muestra qué trae. Se instala con un clic y guarda un respaldo para volver atrás si hiciera falta.</p></details>
+      <details><summary>¿Cómo lo adquiero?</summary><p>Escríbenos por WhatsApp o correo. Te mostramos el sistema en una demo, te enviamos la cotización según tus empresas y usuarios, y te ayudamos con la instalación.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto" aria-labelledby="h-con">
+  <div class="wrap">
+    <div class="cta-final">
+      <div style="position:relative;z-index:1">
+        <h2 id="h-con">Mira BCZM ERP funcionando con tus propios casos</h2>
+        <p>Agenda una demostración sin costo. Te mostramos el SIRE, las detracciones y el cierre del mes con ejemplos de tu rubro.</p>
+      </div>
+      <div class="datos">
+        <div class="dato"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg><div><small>WhatsApp</small><b id="d-wa">934 760 023</b></div><button class="copiar" type="button" data-copiar="d-wa">Copiar</button></div>
+        <div class="dato"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><div><small>Correo</small><b id="d-mail">bczm.erp@gmail.com</b></div><button class="copiar" type="button" data-copiar="d-mail">Copiar</button></div>
+        <div class="dato"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><small>Ubicación</small><b>Lima, Perú</b></div></div>
+        <a class="btn btn-oro" href="https://wa.me/51934760023?text=Hola%2C%20quiero%20una%20demostraci%C3%B3n%20de%20BCZM%20ERP" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="marca" href="#inicio"><span class="logo">BC<span>|</span>ZM</span>BCZM ERP</a>
+    <span>© 2026 BCZM SOLUCIONES CONTABLES S.A.C. · Lima, Perú</span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('[data-copiar]').forEach(b=>b.addEventListener('click',()=>{
+  const el=document.getElementById(b.dataset.copiar),t=el.textContent.trim();
+  const ok=()=>{b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1600)};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecciona y copia'};
+  try{navigator.clipboard.writeText(t).then(ok,sel)}catch(e){sel()}
+}));
+</script>
+
+</body>
+</html>
