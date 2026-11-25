@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadoras laborales · BCZM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>:root{color-scheme:light dark;
+--bg:light-dark(#F4F6F8,#07121E);--ink:light-dark(#0B1F33,#E5ECF4);--mute:light-dark(#5B6573,#9AA9BA);
+--sky:#E0A526;--skyd:light-dark(#2A5C8A,#7FB0DE);--card:light-dark(#FFFFFF,#0E1D2E);--line:light-dark(#DEE3EA,#1E344C);
+--or:light-dark(#0B1F33,#E0A526);--orfg:light-dark(#FFFFFF,#0B1F33);--ok:light-dark(#1B7F5A,#4CC38A);--err:light-dark(#B42318,#F27B6E);--warn:light-dark(#B7791F,#E9B95A);--band:light-dark(#0B1F33,#040C15);--bandink:#FFFFFF;--gold:#E0A526;--cob:light-dark(#2A5C8A,#7FB0DE)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'IBM Plex Sans',system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Sora,'IBM Plex Sans',sans-serif;line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(30px,4.4vw,46px);font-weight:700}h2{font-size:24px;font-weight:600}h3{font-size:17px;font-weight:600}
+.band{padding:clamp(22px,3.4vw,44px) max(5vw,16px)}
+.top{background:var(--band);color:var(--bandink);padding-bottom:0;border-bottom:4px solid var(--gold)}
+.wrap{max-width:1120px;margin:0 auto}
+.brand{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;font-size:14px;font-weight:600;margin-bottom:18px}
+.chip{display:inline-flex;align-items:center;gap:8px;border-radius:99px;padding:6px 14px;font-size:14px;font-weight:600;background:rgba(255,255,255,.1);color:#fff;border:0;cursor:pointer;min-height:36px}
+.chip i{width:9px;height:9px;border-radius:50%;background:#9aa7b6}.chip.on i{background:#4CC38A}.chip.off i{background:var(--gold)}
+.lead{max-width:640px;margin:10px 0 22px;font-size:17px;color:#D5DEE8}
+nav{display:flex;gap:4px;overflow-x:auto}
+nav button{font:600 15px 'IBM Plex Sans',sans-serif;border:0;background:transparent;color:inherit;padding:12px 18px;border-radius:12px 12px 0 0;cursor:pointer;min-height:44px;flex:none;opacity:.8}
+nav button[aria-selected=true]{background:var(--bg);color:var(--ink);opacity:1}
+main .view{display:none}main .view.on{display:block}
+.drop{border:2px dashed var(--skyd);border-radius:12px;background:var(--card);padding:clamp(24px,5vw,48px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center;cursor:pointer;transition:background .2s}
+.drop.over{background:light-dark(#E2EBF4,#15314D)}
+.drop svg{width:96px;height:96px}
+.drop p{margin:6px 0 0;color:var(--mute)}
+.btn{font:600 15px 'IBM Plex Sans',sans-serif;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);padding:10px 16px;min-height:44px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn:focus-visible,nav button:focus-visible,.chip:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--cob);outline-offset:2px}
+.btn.go{background:var(--or);border-color:var(--or);color:var(--orfg)}.btn.go:disabled{background:var(--card);border-color:var(--line);color:var(--mute);cursor:not-allowed}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--mute);font-size:14px}
+.co{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline;margin:28px 0 14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}.kpi b{display:block;font:700 22px Sora,sans-serif;white-space:nowrap}.kpi span{font-size:13px;color:var(--mute)}
+.status{margin:16px 0;border-radius:10px;padding:18px 20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--line)}
+.status.ok{border-left-color:var(--ok)}.status.bad{border-left-color:var(--err)}.status.lic{border-left-color:var(--gold)}
+.status h3{font-size:20px}
+section{margin-top:26px}
+.tabs2{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.f{font:500 14px 'IBM Plex Sans',sans-serif;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:99px;padding:6px 12px;min-height:36px;cursor:pointer}.f[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.issues{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:14px;max-height:420px;overflow:auto}
+.issues li{display:grid;grid-template-columns:86px 150px minmax(0,1fr);gap:10px;padding:9px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.issues li:last-child{border-bottom:0}
+.tag{white-space:nowrap;font-size:12px;font-weight:600;border-radius:6px;padding:2px 8px;justify-self:start;height:fit-content}
+.tag.error{background:light-dark(#fde7df,#3d1c12);color:var(--err)}.tag.warn{background:light-dark(#fff1d6,#3a2c10);color:var(--warn)}.tag.info{background:var(--card);color:var(--mute)}.tag.ok{background:light-dark(#dcf5ea,#123a2b);color:var(--ok)}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-weight:600;color:var(--mute);font-size:13px}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+code{overflow-wrap:anywhere;font-size:13px}
+pre{overflow:auto;background:var(--card);border-radius:12px;padding:14px;font-size:13px;max-height:55vh;margin:0}
+dialog{border:0;border-radius:18px;padding:0;width:min(860px,94vw);background:var(--bg);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(5,15,30,.55)}
+.dh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.db{padding:16px 18px}
+textarea{width:100%;min-height:120px;font:15px/1.4 ui-monospace,Consolas,monospace;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:var(--bg);color:var(--ink)}
+select{font:15px 'IBM Plex Sans',sans-serif;border:1.5px solid var(--line);border-radius:10px;padding:8px;background:var(--bg);color:var(--ink);min-height:40px;width:100%}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}
+.map label{font-size:13px;color:var(--mute);display:grid;gap:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.steps li::before{content:counter(s);width:44px;height:44px;border-radius:10px;background:var(--gold);color:#0B1F33;font:700 20px Sora,sans-serif;display:grid;place-items:center}
+.steps p{margin:4px 0 0;color:var(--mute)}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}summary{cursor:pointer;font-weight:600}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:92vw}
+.toast.on{opacity:1}
+.hide{display:none!important}
+@media(max-width:700px){.grid2{grid-template-columns:minmax(0,1fr)}.issues li{grid-template-columns:minmax(0,1fr)}.drop{grid-template-columns:minmax(0,1fr);text-align:center}.drop svg{margin:0 auto}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--mute)}.stack td:empty{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.form label{display:grid;gap:6px;font-size:14px;font-weight:600}
+.form small{font-weight:400;color:var(--mute);font-size:12.5px}
+input[type=number],input[type=date]{font:16px 'IBM Plex Sans',sans-serif;border:1.5px solid var(--line);border-radius:10px;padding:9px 10px;background:var(--bg);color:var(--ink);min-height:44px;width:100%}
+.ck{display:flex!important;grid-auto-flow:column;align-items:center;gap:10px!important;font-weight:600}
+.ck input{width:22px;height:22px;accent-color:#E0A526}
+.res{margin-top:16px;background:var(--band);color:#fff;border-radius:14px;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-left:8px solid var(--gold)}
+.res b{font:800 clamp(30px,5vw,42px) Sora,sans-serif;color:var(--gold)}
+.res span{color:#D5DEE8}
+.det{margin-top:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
+.cta{margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.cta div{border-left:5px solid var(--gold);padding-left:14px}
+.cta a{color:var(--cob);font-weight:700}
+.logo{width:40px;height:40px;border-radius:10px;background:#13304C;border:1.5px solid #2A5C8A;position:relative;flex:none}
+.logo:before{content:"";position:absolute;left:8px;top:8px;width:24px;height:5px;border-radius:2px;background:#E0A526}
+.logo:after{content:"";position:absolute;left:17px;top:8px;width:5px;height:24px;background:#fff}
+.note{font-size:13.5px;color:var(--mute);margin-top:10px}
+footer{padding:26px max(5vw,16px);color:var(--mute);font-size:13px;text-align:center}
+@media print{.top nav,.cta,.noprint,footer{display:none!important}.view{display:none!important}.view.on{display:block!important}body{background:#fff}}
+</style></head><body>
+<header class="top band"><div class="wrap">
+ <div class="brand"><span style="display:flex;align-items:center;gap:12px"><span class="logo" aria-hidden="true"></span>BCZM Soluciones Contables · Calculadoras laborales</span><span class="chip on"><i></i>Gratis · Perú 2026</span></div>
+ <h1>Calcula beneficios laborales en segundos</h1>
+ <p class="lead">Gratificación, CTS, liquidación y renta de 5ta con la RMV de S/ 1,230, asignación familiar de S/ 123 y UIT de S/ 5,500.</p>
+ <nav role="tablist"><button data-v="gra" aria-selected="true">Gratificación</button><button data-v="cts" aria-selected="false">CTS</button><button data-v="liq" aria-selected="false">Liquidación</button><button data-v="qui" aria-selected="false">Renta de 5ta</button></nav>
+</div></header>
+<main class="band"><div class="wrap">
+
+<section class="view on" id="v-gra"><h2>Gratificación de julio o diciembre</h2>
+ <div class="form" data-f="gra">
+  <label>Sueldo mensual (S/)<input type="number" name="sueldo" value="1230" min="0" step="0.01"></label>
+  <label>Promedio de comisiones u horas extras regulares<input type="number" name="otros" value="0" min="0" step="0.01"><small>Solo si las recibió en 3 de los 6 meses</small></label>
+  <label>Meses completos trabajados en el semestre<input type="number" name="meses" value="6" min="0" max="6"></label>
+  <label>Régimen laboral<select name="reg"><option value="general">General</option><option value="pequena">Pequeña empresa (50%)</option><option value="micro">Microempresa (no aplica)</option></select></label>
+  <label class="ck"><input type="checkbox" name="af"> Recibe asignación familiar (S/ 123)</label>
+  <label class="ck"><input type="checkbox" name="eps"> Está afiliado a una EPS</label>
+ </div>
+ <div class="res"><span>Total a recibir</span><b id="gra-t">S/ 0.00</b></div>
+ <div class="det"><table id="gra-d"></table></div>
+ <p class="note">Plazo de pago: hasta el 15 de julio y el 15 de diciembre. La gratificación y la bonificación no pagan AFP, ONP ni EsSalud, pero sí renta de 5ta.</p>
+</section>
+
+<section class="view" id="v-cts"><h2>Depósito de CTS (semestral)</h2>
+ <div class="form" data-f="cts">
+  <label>Sueldo mensual (S/)<input type="number" name="sueldo" value="1230" min="0" step="0.01"></label>
+  <label>Promedio de comisiones u horas extras regulares<input type="number" name="otros" value="0" min="0" step="0.01"></label>
+  <label>Última gratificación recibida (S/)<input type="number" name="ultGrat" placeholder="Igual al sueldo" min="0" step="0.01"><small>Julio para mayo–octubre; diciembre para noviembre–abril</small></label>
+  <label>Meses completos del periodo<input type="number" name="meses" value="6" min="0" max="6"></label>
+  <label>Días adicionales<input type="number" name="dias" value="0" min="0" max="29"></label>
+  <label>Régimen laboral<select name="reg"><option value="general">General</option><option value="pequena">Pequeña empresa (50%)</option><option value="micro">Microempresa (no aplica)</option></select></label>
+  <label class="ck"><input type="checkbox" name="af"> Recibe asignación familiar (S/ 123)</label>
+ </div>
+ <div class="res"><span>Depósito de CTS</span><b id="cts-t">S/ 0.00</b></div>
+ <div class="det"><table id="cts-d"></table></div>
+ <p class="note">Se deposita hasta el 15 de mayo y el 15 de noviembre. Hasta el 31/12/2026 se puede retirar el 100% (Ley 32322).</p>
+</section>
+
+<section class="view" id="v-liq"><h2>Liquidación de beneficios sociales</h2>
+ <div class="form" data-f="liq">
+  <label>Sueldo mensual (S/)<input type="number" name="sueldo" value="1230" min="0" step="0.01"></label>
+  <label>Promedio de comisiones u horas extras regulares<input type="number" name="otros" value="0" min="0" step="0.01"></label>
+  <label>Fecha de ingreso<input type="date" name="ingreso" value="2025-03-01"></label>
+  <label>Último día de trabajo<input type="date" name="cese" value="2026-11-30"></label>
+  <label>Días de vacaciones pendientes<input type="number" name="vacPend" value="0" min="0"><small>De periodos ya ganados y no gozados</small></label>
+  <label>Última gratificación recibida (S/)<input type="number" name="ultGrat" placeholder="Igual al sueldo" min="0" step="0.01"></label>
+  <label>Régimen laboral<select name="reg"><option value="general">General</option><option value="pequena">Pequeña empresa</option><option value="micro">Microempresa</option></select></label>
+  <label class="ck"><input type="checkbox" name="af"> Recibe asignación familiar (S/ 123)</label>
+  <label class="ck"><input type="checkbox" name="eps"> Está afiliado a una EPS</label>
+  <label class="ck"><input type="checkbox" name="despido"> Fue despido arbitrario (indemnización)</label>
+ </div>
+ <div class="res"><span>Total de la liquidación (bruto)</span><b id="liq-t">S/ 0.00</b></div>
+ <div class="det scroll"><table id="liq-d" class="stack"></table></div>
+ <p class="note">Se paga dentro de las 48 horas del cese. Las vacaciones pagan AFP/ONP: el neto será menor. Cálculo referencial; revisa casos especiales con tu contador.</p>
+</section>
+
+<section class="view" id="v-qui"><h2>Retención de renta de 5ta categoría</h2>
+ <div class="form" data-f="qui">
+  <label>Sueldo mensual (S/)<input type="number" name="sueldo" value="5000" min="0" step="0.01"></label>
+  <label>Otros ingresos fijos mensuales<input type="number" name="otros" value="0" min="0" step="0.01"></label>
+  <label>Otros ingresos del año (bonos, utilidades)<input type="number" name="extra" value="0" min="0" step="0.01"></label>
+  <label class="ck"><input type="checkbox" name="af"> Recibe asignación familiar (S/ 123)</label>
+  <label class="ck"><input type="checkbox" name="grat" checked> Recibe gratificaciones (julio y diciembre)</label>
+  <label class="ck"><input type="checkbox" name="eps"> Está afiliado a una EPS</label>
+ </div>
+ <div class="res"><span>Impuesto anual estimado</span><b id="qui-t">S/ 0.00</b></div>
+ <div class="grid2" style="margin-top:14px"><div class="det"><table id="qui-d"></table></div><div class="det scroll"><table id="qui-m"></table></div></div>
+ <p class="note">Supone el mismo sueldo todo el año. Los gastos deducibles (hasta 3 UIT) se aplican en la declaración anual y pueden generarte devolución.</p>
+</section>
+
+<div class="row noprint" style="margin-top:18px"><button class="btn" id="print" type="button">Imprimir o guardar PDF</button></div>
+
+<div class="cta">
+ <div><h3>¿Llevas planillas?</h3><p class="muted">Con <b>Carga masiva PLAME</b> subes tu planilla en Excel y descargas los TXT para el PDT. Prueba gratis 7 días.</p><a href="https://wa.me/51934760023?text=Hola%2C%20quiero%20la%20prueba%20gratis%20de%20Carga%20masiva%20PLAME" target="_blank" rel="noopener">Pedir prueba por WhatsApp →</a></div>
+ <div><h3>Todo en un solo sistema</h3><p class="muted"><b>BCZM ERP</b>: contabilidad, SIRE, PLE, PDT 621, detracciones, planilla y tesorería.</p><a href="https://bczmerp-byte.github.io/" target="_blank" rel="noopener">Conocer BCZM ERP →</a></div>
+ <div><h3>¿Dudas?</h3><p class="muted">Escríbenos al WhatsApp 934 760 023 o a bczm.erp@gmail.com.</p><a href="https://wa.me/51934760023" target="_blank" rel="noopener">Escribir por WhatsApp →</a></div>
+</div>
+</div></main>
+<footer>© 2026 BCZM Soluciones Contables · Cálculos referenciales según la normativa vigente en Perú (D.S. 015-2026-TR, Ley 27735, D.S. 001-97-TR, LIR). No reemplaza la asesoría profesional.</footer>
+<script>
+/* BCZM · Calculadoras laborales — núcleo de cálculo */
+const CALC = (() => {
+  const P = { rmv:1230, af:123, uit:5500 };
+  const REG = { general:{g:1,c:1,v:1,ind:1}, pequena:{g:.5,c:.5,v:.5,ind:0}, micro:{g:0,c:0,v:.5,ind:0} };
+  const r2 = x => Math.round((x + Number.EPSILON) * 100) / 100;
+  const D = s => { const [y,m,d] = s.split('-').map(Number); return new Date(Date.UTC(y,m-1,d)); };
+  const addDays = (d,n) => new Date(d.getTime() + n*864e5);
+  const addMonths = (d,n) => { const x = new Date(d); const day = x.getUTCDate(); x.setUTCDate(1); x.setUTCMonth(x.getUTCMonth()+n); const last = new Date(Date.UTC(x.getUTCFullYear(), x.getUTCMonth()+1, 0)).getUTCDate(); x.setUTCDate(Math.min(day,last)); return x; };
+  // meses y días completos entre a (inicio) y b (último día trabajado, inclusive)
+  function span(a,b){ if (b < a) return {m:0,d:0}; const e = addDays(b,1); let m = (e.getUTCFullYear()-a.getUTCFullYear())*12 + e.getUTCMonth()-a.getUTCMonth(); if (addMonths(a,m) > e) m--; const d = Math.round((e - addMonths(a,m))/864e5); return {m, d: Math.min(d,29)}; }
+  const rcOf = i => (+i.sueldo||0) + (i.af ? P.af : 0) + (+i.otros||0);
+  function grati(i){ const f = REG[i.reg||'general'].g, rc = rcOf(i), m = Math.max(0,Math.min(6,+i.meses||0));
+    const g = r2(rc/6*m*f), b = r2(g*(i.eps?0.0675:0.09)); return { rc, g, b, total:r2(g+b) }; }
+  function cts(i){ const f = REG[i.reg||'general'].c, rc = rcOf(i), ug = i.ultGrat==null||i.ultGrat==='' ? rc : +i.ultGrat;
+    const rcc = r2(rc + ug/6), m = +i.meses||0, d = +i.dias||0; const t = r2((rcc/12*m + rcc/360*d)*f); return { rc, sexto:r2(ug/6), rcc, total:t }; }
+  function vac(rc,m,d,reg){ return r2((rc/12*m + rc/360*d)*REG[reg||'general'].v); }
+  function liquidacion(i){
+    const reg = i.reg||'general', rc = rcOf(i), ing = D(i.ingreso), ces = D(i.cese);
+    if (ces < ing) return { error:'La fecha de cese es anterior al ingreso.' };
+    const tot = span(ing,ces);
+    // CTS trunca: desde el último 1 may / 1 nov
+    const y = ces.getUTCFullYear(), mo = ces.getUTCMonth();
+    let cs = mo >= 10 ? Date.UTC(y,10,1) : mo >= 4 ? Date.UTC(y,4,1) : Date.UTC(y-1,10,1); cs = new Date(Math.max(cs, ing.getTime()));
+    const cp = span(cs,ces); const ug = i.ultGrat==null||i.ultGrat==='' ? rc : +i.ultGrat; const rcc = rc + ug/6;
+    const ctsT = (tot.m >= 1) ? r2((rcc/12*cp.m + rcc/360*cp.d)*REG[reg].c) : 0;
+    // Gratificación trunca: meses calendario completos del semestre
+    const ss = new Date(Date.UTC(y, mo >= 6 ? 6 : 0, 1)); let gm = 0;
+    for (let k = 0; k < 6; k++){ const a = new Date(Date.UTC(ss.getUTCFullYear(), ss.getUTCMonth()+k, 1)); const z = new Date(Date.UTC(a.getUTCFullYear(), a.getUTCMonth()+1, 0)); if (a >= ing && z <= ces) gm++; }
+    const gT = r2(rc/6*gm*REG[reg].g), bT = r2(gT*(i.eps?0.0675:0.09));
+    // Vacaciones truncas: desde el último aniversario
+    let an = new Date(Date.UTC(y, ing.getUTCMonth(), ing.getUTCDate())); if (an > ces) an = new Date(Date.UTC(y-1, ing.getUTCMonth(), ing.getUTCDate())); if (an < ing) an = ing;
+    const vp = span(an,ces); const vT = tot.m >= 1 ? vac(rc,vp.m,vp.d,reg) : 0;
+    const vPend = r2(rc/30*(+i.vacPend||0));
+    let ind = 0;
+    if (i.despido){ if (reg==='general'){ const raw = 1.5*rc*(tot.m/12) + 1.5*rc/360*tot.d; ind = r2(Math.min(raw, 12*rc)); }
+      else if (reg==='pequena'){ const raw = rc/30*20*(tot.m/12 + tot.d/360); ind = r2(Math.min(raw, rc/30*120)); }
+      else { const raw = rc/30*10*(tot.m/12 + tot.d/360); ind = r2(Math.min(raw, rc/30*90)); } }
+    const items = [
+      ['CTS trunca', ctsT, `${cp.m} m ${cp.d} d desde ${fmt(cs)}`, 'Inafecta'],
+      ['Gratificación trunca', gT, `${gm} mes(es) completo(s) del semestre`, 'No paga AFP/ONP · sí 5ta'],
+      [`Bonificación extraordinaria ${i.eps?'6.75':'9'}%`, bT, 'Sobre la gratificación trunca', 'No paga AFP/ONP · sí 5ta'],
+      ['Vacaciones truncas', vT, `${vp.m} m ${vp.d} d desde ${fmt(an)}`, 'Paga AFP/ONP, EsSalud y 5ta'],
+      ['Vacaciones pendientes', vPend, `${+i.vacPend||0} día(s) no gozados`, 'Paga AFP/ONP, EsSalud y 5ta']];
+    if (i.despido) items.push(['Indemnización por despido arbitrario', ind, `${tot.m} m ${tot.d} d de servicios`, 'Inafecta']);
+    return { rc, tiempo:tot, items, total:r2(items.reduce((s,x)=>s+x[1],0)) };
+  }
+  const fmt = d => `${String(d.getUTCDate()).padStart(2,'0')}/${String(d.getUTCMonth()+1).padStart(2,'0')}/${d.getUTCFullYear()}`;
+  const TR = [[5,.08],[20,.14],[35,.17],[45,.20],[Infinity,.30]];
+  function impuesto(neta){ let rest = Math.max(0,neta), prev = 0, t = 0, det = [];
+    for (const [lim,tasa] of TR){ const cap = lim*P.uit - prev*P.uit; const base = Math.min(rest, cap); if (base > 0){ t += base*tasa; det.push([prev,lim,tasa,r2(base),r2(base*tasa)]); } rest -= base; prev = lim; if (rest <= 0) break; }
+    return { t:r2(t), det }; }
+  function quinta(i){ const rc = rcOf(i), g = i.grat===false ? 0 : 2*rc*(i.eps?1.0675:1.09);
+    const bruta = r2(rc*12 + g + (+i.extra||0)), neta = r2(Math.max(0, bruta - 7*P.uit)), im = impuesto(neta);
+    // grupos SUNAT: [desde, hasta, divisor, retenciones a restar hasta el mes (excl.)]
+    const G = [[0,2,12,0],[3,3,9,3],[4,6,8,4],[7,7,5,7],[8,10,4,8]], ret = [];
+    const sum = n => r2(ret.slice(0,n).reduce((a,b)=>a+b,0));
+    for (const [a,b,dv,k] of G){ const x = r2(Math.max(0, im.t - sum(k))/dv); for (let m = a; m <= b; m++) ret.push(x); }
+    ret.push(r2(Math.max(0, im.t - sum(11))));
+    return { rc, bruta, ded:7*P.uit, neta, imp:im.t, det:im.det, ret, tasa: bruta ? im.t/bruta : 0 }; }
+  return { P, REG, grati, cts, liquidacion, quinta, span, r2 };
+})();
+if (typeof module !== 'undefined') module.exports = CALC;
+
+</script>
+<script>
+const $ = s => document.querySelector(s);
+const money = n => 'S/ ' + (n||0).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+function val(f){ const o = {}; f.querySelectorAll('input,select').forEach(e => { o[e.name] = e.type==='checkbox' ? e.checked : e.value; }); return o; }
+const tbl = rows => rows.map(([a,b,c]) => `<tr><td>${esc(a)}${c?'<div class="muted">'+esc(c)+'</div>':''}</td><td class="n">${typeof b==='number'?money(b):esc(b)}</td></tr>`).join('');
+const RUN = {
+ gra(i){ const r = CALC.grati(i); $('#gra-t').textContent = money(r.total); $('#gra-d').innerHTML = tbl([['Remuneración computable',r.rc,'Sueldo + asignación + promedios'],['Gratificación',r.g,(+i.meses||0)+' de 6 meses'],['Bonificación extraordinaria '+(i.eps?'6.75%':'9%'),r.b]]); },
+ cts(i){ const r = CALC.cts(i); $('#cts-t').textContent = money(r.total); $('#cts-d').innerHTML = tbl([['Sueldo + asignación + promedios',r.rc],['1/6 de la última gratificación',r.sexto],['Remuneración computable',r.rcc],['Depósito',r.total,(+i.meses||0)+' meses y '+(+i.dias||0)+' días']]); },
+ liq(i){ const r = CALC.liquidacion(i); if (r.error){ $('#liq-t').textContent = '—'; $('#liq-d').innerHTML = '<tr><td>'+esc(r.error)+'</td></tr>'; return; }
+   $('#liq-t').textContent = money(r.total);
+   $('#liq-d').innerHTML = '<thead><tr><th>Concepto</th><th>Periodo</th><th>Aportes</th><th class="n">Monto</th></tr></thead><tbody>' + r.items.map(([a,m,p,t]) => `<tr><td data-l="Concepto"><b>${esc(a)}</b></td><td data-l="Periodo">${esc(p)}</td><td data-l="Aportes">${esc(t)}</td><td class="n" data-l="Monto">${money(m)}</td></tr>`).join('') + `<tr><td data-l="Tiempo de servicios" colspan="3">Tiempo de servicios: ${r.tiempo.m} meses y ${r.tiempo.d} días</td><td class="n" data-l="Total"><b>${money(r.total)}</b></td></tr></tbody>`; },
+ qui(i){ const r = CALC.quinta(i); $('#qui-t').textContent = money(r.imp);
+   $('#qui-d').innerHTML = tbl([['Renta bruta anual proyectada',r.bruta],['(−) 7 UIT',-r.ded],['Renta neta',r.neta]].concat(r.det.map(([a,b,t,base,imp]) => ['Tramo '+Math.round(t*100)+'% ('+a+' a '+(b===Infinity?'más':b)+' UIT)', imp, 'Base '+money(base)])).concat([['Impuesto anual',r.imp,'Tasa efectiva '+(r.tasa*100).toFixed(2)+'%']]));
+   const M = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Setiembre','Octubre','Noviembre','Diciembre'];
+   $('#qui-m').innerHTML = '<thead><tr><th>Mes</th><th class="n">Retención</th></tr></thead><tbody>' + r.ret.map((x,k) => `<tr><td>${M[k]}</td><td class="n">${money(x)}</td></tr>`).join('') + '</tbody>'; }
+};
+document.querySelectorAll('.form').forEach(f => { const go = () => RUN[f.dataset.f](val(f)); f.addEventListener('input', go); f.addEventListener('change', go); go(); });
+document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('nav button').forEach(x => x.setAttribute('aria-selected', x===b)); document.querySelectorAll('.view').forEach(v => v.classList.toggle('on', v.id === 'v-'+b.dataset.v)); }));
+$('#print').addEventListener('click', () => window.print());
+</script><!--UPD--><script>window.BCZM_UPD={p:"CALC",v:"2026.11.25"};(() => {
+  const C = window.BCZM_UPD || {}; if (!C.p || !C.v) return;
+  const BASE = C.u || 'https://raw.githubusercontent.com/bczmerp-byte/actualizaciones/main/';
+  const cmp = (a, b) => { const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number); for (let i = 0; i < Math.max(x.length, y.length); i++){ const d = (x[i] || 0) - (y[i] || 0); if (d) return d; } return 0; };
+  const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' })[c]);
+  async function check(){
+    let j; try { const r = await fetch(BASE + 'herramientas.json?t=' + Date.now(), { cache:'no-store' }); if (!r.ok) return; j = await r.json(); } catch(e){ return; }
+    const it = j && j.productos && j.productos[C.p]; if (!it || cmp(it.version, C.v) <= 0) return;
+    let hid = null; try { hid = JSON.parse(localStorage.getItem('bczm_upd_oculta_' + C.p) || 'null'); } catch(e){}
+    if (hid && hid.v === it.version && Date.now() - hid.t < 3 * 864e5) return;
+    const nombre = (it.nombre || C.p) + ' ' + it.version;
+    const wa = 'https://wa.me/51934760023?text=' + encodeURIComponent('Hola, quiero la actualización de ' + (it.nombre || C.p) + ' a la versión ' + it.version + '. Soy cliente con licencia.');
+    const st = document.createElement('style'); st.textContent = '.bzupd{position:sticky;top:0;z-index:999;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;background:#E0A526;color:#0B1F33;padding:10px max(3vw,14px);font:600 14px/1.4 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.2)}.bzupd b{font-weight:800}.bzupd small{font-weight:500;display:block}.bzupd .bx{display:flex;gap:8px;margin-left:auto}.bzupd a.b,.bzupd button{font:700 14px inherit;border-radius:10px;border:2px solid #0B1F33;padding:7px 14px;cursor:pointer;background:#0B1F33;color:#fff;text-decoration:none;display:inline-flex;align-items:center}.bzupd button.l{background:transparent;color:#0B1F33}';
+    document.head.appendChild(st);
+    const bar = document.createElement('div'); bar.className = 'bzupd'; bar.setAttribute('role', 'status'); bar.setAttribute('data-nosave', '');
+    bar.innerHTML = `<div><b>Hay una versión nueva (${esc(it.version)})</b> de esta herramienta.<small>${esc((it.notas || []).join(' · '))}</small><small>Pídela por WhatsApp y reemplaza este archivo: tu clave y tu avance se mantienen.</small></div><div class="bx"><a class="b" href="${wa}" target="_blank" rel="noopener">Pedir actualización</a><button type="button" class="l">Recordármelo en 3 días</button></div>`;
+    document.body.insertBefore(bar, document.body.firstChild);
+    bar.querySelector('.l').onclick = () => { try { localStorage.setItem('bczm_upd_oculta_' + C.p, JSON.stringify({ v:it.version, t:Date.now() })); } catch(e){} bar.remove(); };
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(check, 1200)); else setTimeout(check, 1200);
+})();
+</script><!--/UPD--></body></html>
