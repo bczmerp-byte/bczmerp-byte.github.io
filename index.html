@@ -13,7 +13,7 @@
 <meta property="og:locale" content="es_PE">
 <meta property="og:title" content="BCZM ERP · Sistema contable para empresas peruanas">
 <meta property="og:description" content="Contabilidad, SIRE, detracciones, planilla y tesorería en un solo sistema. Se instala en tu oficina y tus datos se quedan contigo.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1626'/%3E%3Crect width='64' height='8' fill='%23D9A93F'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='19' fill='white' text-anchor='middle'%3EBCZM%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20aria-hidden%3D%22true%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%2311233d%22/%3E%3Crect%20x%3D%2224%22%20y%3D%2226.5%22%20width%3D%2252%22%20height%3D%227%22%20rx%3D%223.5%22%20fill%3D%22%23D9A93F%22/%3E%3Crect%20x%3D%2248.3%22%20y%3D%2227%22%20width%3D%223.4%22%20height%3D%2253%22%20rx%3D%221.7%22%20fill%3D%22%23fff%22/%3E%3Ctext%20x%3D%2228.5%22%20y%3D%2267%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2227%22%20letter-spacing%3D%22-1.5%22%20fill%3D%22%23fff%22%3EBC%3C/text%3E%3Ctext%20x%3D%2271.5%22%20y%3D%2267%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2227%22%20letter-spacing%3D%22-1.5%22%20fill%3D%22%23fff%22%3EZM%3C/text%3E%3C/svg%3E">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"BCZM ERP","applicationCategory":"BusinessApplication","operatingSystem":"Windows 10, Windows 11","description":"Sistema contable para empresas peruanas: contabilidad, SIRE, detracciones, guías de remisión, planilla y tesorería.","inLanguage":"es-PE","author":{"@type":"Organization","name":"BCZM SOLUCIONES CONTABLES S.A.C."},"provider":{"@type":"Organization","name":"BCZM SOLUCIONES CONTABLES S.A.C.","email":"bczm.erp@gmail.com","telephone":"+51 934 760 023","address":{"@type":"PostalAddress","addressLocality":"Lima","addressCountry":"PE"}}}
 </script>
@@ -230,21 +230,40 @@ footer .marca{color:var(--fg)}
 footer .logo{background:var(--noche);color:#fff}
 </style>
 
-<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+.bl{width:38px;height:38px;display:block;flex:none}.bl svg{width:100%;height:100%;display:block;border-radius:10px}
+.nav a.tool{color:var(--oro);font-weight:700}
+.ig{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.18);color:#fff}.ig svg{width:19px;height:19px}.ig:hover{border-color:var(--oro);color:var(--oro)}
+.nov{background:var(--noche);border-top:1px solid rgba(255,255,255,.08)}.nov .wrap{display:flex;gap:10px 22px;flex-wrap:wrap;align-items:center;padding:12px max(5vw,16px);color:#C9D6E8;font-size:13.5px}
+.nov b{color:var(--oro);font:800 12px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;background:rgba(217,169,63,.12);border:1px solid rgba(217,169,63,.35);border-radius:99px;padding:5px 11px}
+.nov span{display:inline-flex;align-items:center;gap:7px}.nov span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--oro)}
+.herr{background:linear-gradient(180deg,var(--bg),var(--surface))}
+.herr .caja{background:var(--surface);border:1.5px solid var(--line);border-left:5px solid var(--oro);border-radius:20px;padding:clamp(22px,3vw,38px);display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,3vw,40px);align-items:center;box-shadow:0 20px 50px -24px rgba(15,27,45,.25)}
+.herr h2{font:800 clamp(26px,3.4vw,38px)/1.08 var(--display);letter-spacing:-.02em;margin:10px 0 10px}
+.herr .lead2{color:var(--muted);font-size:17px;margin:0 0 18px;max-width:46ch}
+.herr .hbtns{display:flex;gap:12px;flex-wrap:wrap}
+.herr .hc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.herr .hcard{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.herr .hcard b{display:block;font:800 16px/1.15 var(--display);margin-bottom:3px}.herr .hcard small{color:var(--muted);font-size:13px;line-height:1.4}
+.herr .tag{display:inline-block;font:800 11px/1 var(--display);letter-spacing:.04em;text-transform:uppercase;border-radius:99px;padding:4px 9px;margin-bottom:8px}
+.herr .tag.g{background:rgba(31,138,91,.12);color:var(--ok)}.herr .tag.p{background:rgba(217,169,63,.15);color:var(--accent)}
+@media(max-width:860px){.herr .caja{grid-template-columns:1fr}}
+.foot-ig{display:inline-flex;align-items:center;gap:7px;color:inherit;text-decoration:none;opacity:.85}.foot-ig:hover{opacity:1;color:var(--oro)}
+</style>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="marca" href="#inicio" aria-label="BCZM ERP, inicio"><span class="logo">BC<span>|</span>ZM</span>BCZM ERP</a>
+    <a class="marca" href="#inicio" aria-label="BCZM ERP, inicio"><span class="bl"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#11233d"/><rect x="24" y="26.5" width="52" height="7" rx="3.5" fill="#D9A93F"/><rect x="48.3" y="27" width="3.4" height="53" rx="1.7" fill="#fff"/><text x="28.5" y="67" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">BC</text><text x="71.5" y="67" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">ZM</text></svg></span>BCZM ERP</a>
     <nav class="nav" aria-label="Secciones">
       <a href="#funciones">Funciones</a>
       <a href="#mes">Tu mes contable</a>
       <a href="#oficina">En tu oficina</a>
       <a href="#seguridad">Seguridad</a>
       <a href="#preguntas">Preguntas</a>
-      <a href="herramientas/"><b>Herramientas</b></a>
+      <a class="tool" href="herramientas/">Herramientas</a>
     </nav>
-    <a class="btn btn-oro" href="https://wa.me/51934760023?text=Hola%2C%20quiero%20una%20demostraci%C3%B3n%20de%20BCZM%20ERP" target="_blank" rel="noopener">Pide una demo</a>
+    <div style="display:flex;gap:10px;align-items:center"><a class="ig" href="https://www.instagram.com/bczmsoluciones" target="_blank" rel="noopener" aria-label="Instagram de BCZM"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a class="btn btn-oro" href="https://wa.me/51934760023?text=Hola%2C%20quiero%20una%20demostraci%C3%B3n%20de%20BCZM%20ERP" target="_blank" rel="noopener">Pide una demo</a></div>
   </div>
 </header>
 
@@ -302,6 +321,8 @@ footer .logo{background:var(--noche);color:#fff}
   </div>
 </div>
 
+<div class="nov"><div class="wrap"><b>Novedades v0.9.2</b><span>Actualizaciones firmadas y verificadas antes de instalar</span><span>Protección contra el cambio de fecha del sistema</span><span>Panel de actualizaciones centralizado en la cuenta BCZM</span></div></div>
+
 <section id="funciones" aria-labelledby="h-func">
   <div class="wrap">
     <div class="cab">
@@ -358,6 +379,28 @@ footer .logo{background:var(--noche);color:#fff}
         <p>Cotizaciones, órdenes, contratos y proyectos.</p>
         <ul><li>Cotizaciones</li><li>Órdenes</li></ul>
       </article>
+    </div>
+  </div>
+</section>
+
+<section class="herr" id="herramientas" aria-labelledby="h-herr">
+  <div class="wrap">
+    <div class="caja">
+      <div>
+        <div class="eyebrow">Herramientas para contadores</div>
+        <h2 id="h-herr">¿Aún no necesitas todo el ERP? Empieza con nuestras herramientas</h2>
+        <p class="lead2">22 herramientas que se abren en el navegador, sin instalar nada ni usar macros: XML a registro, detracciones, PLAME, SIRE, boletas, kardex, estados financieros, costeo de importaciones y más. Gratis muchas; las Pro desde S/ 29 al año, o todas con la Suite por S/ 199.</p>
+        <div class="hbtns">
+          <a class="btn btn-oro" href="herramientas/">Ver todas las herramientas</a>
+          <a class="btn" href="herramientas/suite.html" target="_blank" rel="noopener" style="background:var(--surface);color:var(--fg);border:1.5px solid var(--line)">Probar la demo</a>
+        </div>
+      </div>
+      <div class="hc">
+        <div class="hcard"><span class="tag g">Gratis</span><b>IGV, renta y 616</b><small>Cálculos del mes y validación de RUC, sin clave.</small></div>
+        <div class="hcard"><span class="tag p">Pro</span><b>Detracciones TXT</b><small>Arma el archivo de pago masivo para SUNAT.</small></div>
+        <div class="hcard"><span class="tag p">Pro</span><b>Carga masiva PLAME</b><small>De tu Excel a los archivos del PDT PLAME.</small></div>
+        <div class="hcard"><span class="tag p">Pro</span><b>Balance y EEFF</b><small>Estados financieros y ratios desde tu balance.</small></div>
+      </div>
     </div>
   </div>
 </section>
@@ -423,23 +466,6 @@ footer .logo{background:var(--noche);color:#fff}
   </div>
 </section>
 
-<section id="herramientas" aria-labelledby="h-herr">
-  <div class="wrap">
-    <div class="cab">
-      <div class="eyebrow">Herramientas para contadores</div>
-      <h2 id="h-herr">¿No necesitas un ERP completo? Empieza con nuestras herramientas</h2>
-      <p>21 herramientas que se abren en el navegador, sin instalar nada ni usar macros. Gratis, desde S/ 29 al año por módulo o S/ 199 al año la Suite completa.</p>
-    </div>
-    <div class="mods">
-      <article class="mod" style="border:2px solid #D9A93F"><h3>Suite contable BCZM</h3><p>Los 21 módulos, Carga masiva PLAME, Conciliador SIRE y bancario, y 4 plantillas Excel pro.</p><ul><li>S/ 199 al año</li><li>Prueba gratis 7 días</li><li>Hasta 5 RUC</li></ul></article>
-      <article class="mod"><h3>Compras, ventas y tributos</h3><p>XML a registro, validar registro, detracciones TXT, retenciones, IGV y renta, 4ta y 616.</p><ul><li>Desde S/ 0</li></ul></article>
-      <article class="mod"><h3>Planillas</h3><p>Carga masiva PLAME, boletas de pago en PDF y calculadoras laborales.</p><ul><li>Desde S/ 0</li></ul></article>
-      <article class="mod"><h3>Contabilidad y cierre</h3><p>Kardex, depreciación, diferencia de cambio, balance, EEFF, ratios y antigüedad de saldos.</p><ul><li>S/ 29 al año c/u</li></ul></article>
-    </div>
-    <div class="cta" style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn-oro" href="herramientas/">Ver todas las herramientas y precios</a><a class="btn" style="border:1.5px solid currentColor" href="herramientas/suite.html">Abrir la Suite</a></div>
-  </div>
-</section>
-
 <section id="preguntas" aria-labelledby="h-faq">
   <div class="wrap faq">
     <div class="cab" style="margin:0">
@@ -468,6 +494,7 @@ footer .logo{background:var(--noche);color:#fff}
         <div class="dato"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg><div><small>WhatsApp</small><b id="d-wa">934 760 023</b></div><button class="copiar" type="button" data-copiar="d-wa">Copiar</button></div>
         <div class="dato"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><div><small>Correo</small><b id="d-mail">bczm.erp@gmail.com</b></div><button class="copiar" type="button" data-copiar="d-mail">Copiar</button></div>
         <div class="dato"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><small>Ubicación</small><b>Lima, Perú</b></div></div>
+        <a class="dato" href="https://www.instagram.com/bczmsoluciones" target="_blank" rel="noopener" style="text-decoration:none;color:inherit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><div><small>Instagram</small><b>@bczmsoluciones</b></div></a>
         <a class="btn btn-oro" href="https://wa.me/51934760023?text=Hola%2C%20quiero%20una%20demostraci%C3%B3n%20de%20BCZM%20ERP" target="_blank" rel="noopener">Escribir por WhatsApp</a>
       </div>
     </div>
@@ -477,8 +504,9 @@ footer .logo{background:var(--noche);color:#fff}
 
 <footer>
   <div class="wrap">
-    <a class="marca" href="#inicio"><span class="logo">BC<span>|</span>ZM</span>BCZM ERP</a>
+    <a class="marca" href="#inicio"><span class="bl"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#11233d"/><rect x="24" y="26.5" width="52" height="7" rx="3.5" fill="#D9A93F"/><rect x="48.3" y="27" width="3.4" height="53" rx="1.7" fill="#fff"/><text x="28.5" y="67" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">BC</text><text x="71.5" y="67" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">ZM</text></svg></span>BCZM ERP</a>
     <span>© 2026 BCZM SOLUCIONES CONTABLES S.A.C. · Lima, Perú</span>
+    <a class="foot-ig" href="https://www.instagram.com/bczmsoluciones" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> @bczmsoluciones</a>
   </div>
 </footer>
 
