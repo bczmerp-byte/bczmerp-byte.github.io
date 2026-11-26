@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buscador del Plan Contable (PCGE) · BCZM</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2311233d'/%3E%3Crect x='22' y='29' width='56' height='10' rx='5' fill='%23E0A526'/%3E%3Crect x='45' y='30' width='10' height='47' rx='3' fill='%23ffffff'/%3E%3C/svg%3E">
+<style>
+:root{--navy:#11233d;--navy2:#1b3550;--gold:#d9a93f;--gold2:#e0a526;--ink:#0b1f33;--line:#dbe2ea;--soft:#f4f7fb}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#eef2f7;color:var(--ink);font-size:14px}
+header.top{background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff;border-bottom:4px solid var(--gold)}
+.bar{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:14px}
+.lg{width:46px;height:46px;background:#fff;border-radius:12px;padding:5px;flex:none}.lg svg{width:100%;height:100%;border-radius:7px;display:block}
+.bn{font-weight:800;font-size:18px}.bn small{display:block;color:#e6b94a;font-size:11px;font-weight:700;letter-spacing:2px}
+.ttl{margin-left:auto;text-align:right;font-size:12px;color:#cdd8e6}.ttl b{display:block;font-size:16px;color:#fff}
+.wrap{max-width:1080px;margin:0 auto;padding:16px 14px 60px}
+.search{position:sticky;top:0;background:#eef2f7;padding:12px 0;z-index:5}
+#q{width:100%;border:2px solid var(--gold);border-radius:12px;padding:15px 16px;font-size:17px;outline:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:6px 13px;font-size:12.5px;font-weight:700;color:#55657a;cursor:pointer}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.count{font-size:12px;color:#66788e;margin:10px 2px}
+.item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin-bottom:8px;display:flex;gap:14px;align-items:center;cursor:pointer}
+.item:hover{border-color:var(--gold)}
+.code{font-weight:800;color:var(--navy);font-size:16px;min-width:64px;font-variant-numeric:tabular-nums}
+.nm{flex:1}.nm b{display:block;font-size:14px}.nm span{font-size:12px;color:#7a8aa0}
+.lvl{font-size:10px;font-weight:700;color:#9a7314;background:#fdf3db;border-radius:6px;padding:2px 7px;flex:none}
+.copy{font-size:11px;color:#55657a;border:1px solid var(--line);border-radius:6px;padding:5px 9px;background:#fff;flex:none}
+.copy.ok{background:#e3f3eb;color:#1b7f5a;border-color:#bfe6cf}
+.empty{text-align:center;color:#8494a6;padding:40px}
+.foot{margin-top:24px;text-align:center;font-size:12px;color:#66788e}.foot b{color:var(--navy)}
+mark{background:#fdf0cb;padding:0 1px}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+  <span class="lg"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="22" fill="#11233d"/><rect x="24" y="26.5" width="52" height="7" rx="3.5" fill="#E0A526"/><rect x="48.3" y="27" width="3.4" height="53" rx="1.7" fill="#fff"/><text x="28.5" y="67" text-anchor="middle" font-family="Arial" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">BC</text><text x="71.5" y="67" text-anchor="middle" font-family="Arial" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">ZM</text></svg></span>
+  <span class="bn">BCZM<small>SOLUCIONES CONTABLES</small></span>
+  <span class="ttl"><b>Buscador PCGE</b>Plan Contable General Empresarial</span>
+</div></header>
+<div class="wrap">
+  <div class="search">
+    <input id="q" placeholder="Busca por código o nombre: &quot;42&quot;, &quot;detracción&quot;, &quot;IGV&quot;, &quot;tributos por pagar&quot;…" autocomplete="off">
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="count" id="count"></div>
+  <div id="list"></div>
+  <div class="foot">BCZM Soluciones Contables S.A.C. · WhatsApp 934 760 023 · bczmerp-byte.github.io<br>
+  Basado en el Plan Contable General Empresarial (PCGE). Referencia de apoyo; confirma la cuenta según tu operación.</div>
+</div>
+<script>
+// code,name,level(1=elem,2=cuenta,3=subcuenta)  — subset de uso frecuente del PCGE
+const E={1:'Activo disponible y exigible',2:'Activo realizable',3:'Activo inmovilizado',4:'Pasivo',5:'Patrimonio neto',6:'Gastos por naturaleza',7:'Ingresos',8:'Saldos intermediarios de gestión',9:'Contabilidad analítica / costos',0:'Cuentas de orden'};
+const D=[
+// ELEMENTO 1
+['10','Efectivo y equivalentes de efectivo'],['101','Caja'],['104','Cuentas corrientes en instituciones financieras'],['1041','Cuentas corrientes operativas'],['107','Fondos sujetos a restricción'],
+['12','Cuentas por cobrar comerciales - terceros'],['121','Facturas, boletas y otros comprobantes por cobrar'],['123','Letras por cobrar'],
+['13','Cuentas por cobrar comerciales - relacionadas'],
+['14','Cuentas por cobrar al personal, accionistas, directores y gerentes'],['141','Personal'],
+['16','Cuentas por cobrar diversas - terceros'],['162','Reclamaciones a terceros'],['167','Tributos por acreditar'],['16731','IGV - percepciones'],
+['18','Servicios y otros contratados por anticipado'],['189','Otros gastos contratados por anticipado'],
+['19','Estimación de cuentas de cobranza dudosa'],
+// ELEMENTO 2
+['20','Mercaderías'],['201','Mercaderías manufacturadas'],
+['21','Productos terminados'],['24','Materias primas'],['25','Materiales auxiliares, suministros y repuestos'],['252','Suministros'],
+['28','Existencias por recibir'],['29','Desvalorización de existencias'],
+// ELEMENTO 3
+['33','Inmuebles, maquinaria y equipo'],['331','Terrenos'],['332','Edificaciones'],['333','Maquinarias y equipos de explotación'],['334','Unidades de transporte'],['335','Muebles y enseres'],['336','Equipos diversos'],['3361','Equipos para procesamiento de información (cómputo)'],
+['34','Intangibles'],['343','Programas de computadora (software)'],
+['37','Activo diferido'],['371','Impuesto a la renta diferido'],
+['39','Depreciación, amortización y agotamiento acumulados'],['391','Depreciación acumulada'],['392','Amortización acumulada'],
+// ELEMENTO 4
+['40','Tributos, contraprestaciones y aportes al sistema de pensiones y de salud por pagar'],
+['401','Gobierno central'],['4011','Impuesto general a las ventas (IGV)'],['40111','IGV - cuenta propia'],['4017','Impuesto a la renta'],['40171','Renta de tercera categoría'],['40172','Renta de cuarta categoría'],['40173','Renta de quinta categoría'],['4018','Otros impuestos y contraprestaciones'],['40185','Detracciones (SPOT)'],
+['403','Instituciones públicas (ESSALUD, ONP)'],['4031','ESSALUD'],['4032','ONP'],
+['407','Administradoras de fondos de pensiones (AFP)'],
+['41','Remuneraciones y participaciones por pagar'],['411','Remuneraciones por pagar'],['413','Participaciones de los trabajadores por pagar'],['415','Beneficios sociales de los trabajadores por pagar'],['4151','Compensación por tiempo de servicios (CTS)'],
+['42','Cuentas por pagar comerciales - terceros'],['421','Facturas, boletas y otros comprobantes por pagar'],['423','Letras por pagar'],
+['43','Cuentas por pagar comerciales - relacionadas'],
+['44','Cuentas por pagar a los accionistas, directores y gerentes'],
+['45','Obligaciones financieras'],['451','Préstamos de instituciones financieras y otras entidades'],['455','Costos de financiación por pagar'],
+['46','Cuentas por pagar diversas - terceros'],['469','Otras cuentas por pagar diversas'],
+['49','Pasivo diferido'],['491','Impuesto a la renta diferido'],
+// ELEMENTO 5
+['50','Capital'],['501','Capital social'],['52','Capital adicional'],['58','Reservas'],['582','Legal'],
+['59','Resultados acumulados'],['591','Utilidades no distribuidas'],['592','Pérdidas acumuladas'],
+// ELEMENTO 6
+['60','Compras'],['601','Mercaderías'],['603','Materiales auxiliares, suministros y repuestos'],['609','Costos vinculados con las compras'],['6091','Costos vinculados con las compras de mercaderías'],
+['61','Variación de existencias'],['611','Mercaderías'],
+['62','Gastos de personal, directores y gerentes'],['621','Remuneraciones'],['6211','Sueldos y salarios'],['627','Seguridad, previsión social y otras contribuciones'],['6271','Régimen de prestaciones de salud (ESSALUD)'],['629','Beneficios sociales de los trabajadores'],['6291','Compensación por tiempo de servicios'],
+['63','Gastos de servicios prestados por terceros'],['631','Transporte, correos y gastos de viaje'],['632','Asesoría y consultoría'],['6321','Administrativa'],['634','Mantenimiento y reparaciones'],['635','Alquileres'],['636','Servicios básicos'],['6361','Energía eléctrica'],['6363','Agua'],['6364','Teléfono'],['637','Publicidad, publicaciones, relaciones públicas'],['639','Otros servicios prestados por terceros'],
+['64','Gastos por tributos'],['641','Gobierno central'],['6411','Impuesto general a las ventas y selectivo al consumo'],['643','Gobierno local'],['646','Tributos a otras instituciones'],
+['65','Otros gastos de gestión'],['651','Seguros'],['656','Suministros'],['659','Otros gastos de gestión'],
+['67','Gastos financieros'],['671','Gastos en operaciones de endeudamiento y otros'],['673','Intereses por préstamos y otras obligaciones'],['676','Diferencia de cambio'],['679','Otros gastos financieros'],
+['68','Valuación y deterioro de activos y provisiones'],['681','Depreciación'],['6814','Depreciación de inmuebles, maquinaria y equipo - costo'],['684','Valuación de activos'],['6841','Estimación de cuentas de cobranza dudosa'],
+['69','Costo de ventas'],['691','Mercaderías'],['6911','Mercaderías manufacturadas - terceros'],['694','Servicios'],
+// ELEMENTO 7
+['70','Ventas'],['701','Mercaderías'],['7011','Mercaderías manufacturadas - terceros'],['702','Productos terminados'],['704','Prestación de servicios'],['709','Devoluciones sobre ventas'],
+['73','Descuentos, rebajas y bonificaciones obtenidos'],['74','Descuentos, rebajas y bonificaciones concedidos'],
+['75','Otros ingresos de gestión'],['751','Servicios en beneficio del personal'],['754','Alquileres'],['759','Otros ingresos de gestión'],
+['77','Ingresos financieros'],['772','Rendimientos ganados'],['776','Diferencia de cambio'],['777','Ganancia por medición de activos/pasivos'],
+['79','Cargas imputables a cuentas de costos y gastos'],['791','Cargas imputables a cuentas de costos y gastos'],
+// ELEMENTO 8
+['80','Margen comercial'],['81','Producción del ejercicio'],['82','Valor agregado'],['83','Excedente bruto (insuficiencia bruta) de explotación'],['84','Resultado de explotación'],['85','Resultado antes de participaciones e impuestos'],['88','Impuesto a la renta'],['89','Determinación del resultado del ejercicio'],
+// ELEMENTO 0
+['01','Bienes y valores entregados'],['03','Otras cuentas de orden deudoras'],['07','Deudas indexadas'],
+];
+const items=D.map(([c,n])=>({c,n,e:c[0],lvl:c.length==1?1:c.length==2?2:3}));
+const chipsEl=document.getElementById('chips'),listEl=document.getElementById('list'),countEl=document.getElementById('count'),q=document.getElementById('q');
+let filt='';
+const elems=['','1','2','3','4','5','6','7'];
+[['','Todos'],['1','Elem 1'],['2','Elem 2'],['3','Elem 3'],['4','Elem 4'],['5','Elem 5'],['6','Elem 6'],['7','Elem 7'],['8','Elem 8'],['0','Orden']].forEach(([v,l])=>{
+  const b=document.createElement('div');b.className='chip'+(v==''?' on':'');b.textContent=l;b.onclick=()=>{filt=v;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));b.classList.add('on');render();};chipsEl.appendChild(b);
+});
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function hl(t,term){if(!term)return t;const i=norm(t).indexOf(norm(term));if(i<0)return t;return t.slice(0,i)+'<mark>'+t.slice(i,i+term.length)+'</mark>'+t.slice(i+term.length);}
+function render(){
+  const term=q.value.trim();const nt=norm(term);
+  let r=items.filter(it=>(filt===''||it.e===filt));
+  if(term)r=r.filter(it=>it.c.startsWith(term)||norm(it.n).includes(nt));
+  countEl.textContent=r.length+' cuenta'+(r.length==1?'':'s');
+  if(!r.length){listEl.innerHTML='<div class="empty">Sin resultados. Prueba con otra palabra o el código.</div>';return;}
+  listEl.innerHTML=r.slice(0,200).map(it=>`<div class="item" onclick="cp('${it.c}',this)">
+    <span class="code">${hl(it.c,term&&/^\d/.test(term)?term:'')}</span>
+    <span class="nm"><b>${hl(it.n,/^\d/.test(term)?'':term)}</b><span>Elemento ${it.e} · ${E[it.e]}</span></span>
+    <span class="lvl">${it.lvl==1?'Elemento':it.lvl==2?'Cuenta':'Subcuenta'}</span>
+    <span class="copy">Copiar</span></div>`).join('');
+}
+function cp(code,el){navigator.clipboard&&navigator.clipboard.writeText(code);const b=el.querySelector('.copy');b.textContent='¡Copiado!';b.classList.add('ok');setTimeout(()=>{b.textContent='Copiar';b.classList.remove('ok');},1200);}
+q.addEventListener('input',render);render();q.focus();
+</script>
+</body>
+</html>

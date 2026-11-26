@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador de Régimen Tributario · BCZM</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2311233d'/%3E%3Crect x='22' y='29' width='56' height='10' rx='5' fill='%23E0A526'/%3E%3Crect x='45' y='30' width='10' height='47' rx='3' fill='%23ffffff'/%3E%3C/svg%3E">
+<style>
+:root{--navy:#11233d;--navy2:#1b3550;--gold:#d9a93f;--gold2:#e0a526;--ink:#0b1f33;--line:#dbe2ea;--soft:#f4f7fb;--yel:#fff6df}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#eef2f7;color:var(--ink);font-size:14px}
+header.top{background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff;border-bottom:4px solid var(--gold)}
+.bar{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:14px}
+.lg{width:46px;height:46px;background:#fff;border-radius:12px;padding:5px;flex:none}.lg svg{width:100%;height:100%;border-radius:7px;display:block}
+.bn{font-weight:800;font-size:18px}.bn small{display:block;color:#e6b94a;font-size:11px;font-weight:700;letter-spacing:2px}
+.ttl{margin-left:auto;text-align:right;font-size:12px;color:#cdd8e6}.ttl b{display:block;font-size:16px;color:#fff}
+.wrap{max-width:1080px;margin:0 auto;padding:16px 14px 60px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px}
+h2{font-size:16px;color:var(--navy);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.fld{display:flex;flex-direction:column;gap:4px}.fld label{font-size:12px;font-weight:700;color:#44566c}
+.fld input,.fld select{border:1px solid var(--line);background:var(--yel);border-radius:7px;padding:9px;font-size:14px}
+.uit{font-size:11px;color:#8494a6;margin-top:4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+.yes{color:#1b7f5a;font-weight:800}.no{color:#b23b3b;font-weight:800}
+tr.best td{background:#fbf3dc}
+.best-badge{display:inline-block;background:var(--gold2);color:var(--navy);font-weight:800;font-size:10px;border-radius:6px;padding:1px 7px;margin-left:6px}
+.rec{background:var(--soft);border-left:4px solid var(--gold);border-radius:8px;padding:14px;margin-top:14px;font-size:14px}
+.btns{display:flex;gap:10px;margin-top:16px}
+button.act{background:linear-gradient(90deg,var(--gold2),var(--gold));color:var(--navy);font-weight:800;border:0;border-radius:9px;padding:11px 18px;font-size:14px;cursor:pointer}
+.note{font-size:11.5px;color:#8494a6;margin-top:12px;line-height:1.55}
+.foot{margin-top:22px;text-align:center;font-size:12px;color:#66788e}.foot b{color:var(--navy)}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+  <span class="lg"><svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="22" fill="#11233d"/><rect x="24" y="26.5" width="52" height="7" rx="3.5" fill="#E0A526"/><rect x="48.3" y="27" width="3.4" height="53" rx="1.7" fill="#fff"/><text x="28.5" y="67" text-anchor="middle" font-family="Arial" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">BC</text><text x="71.5" y="67" text-anchor="middle" font-family="Arial" font-weight="800" font-size="27" letter-spacing="-1.5" fill="#fff">ZM</text></svg></span>
+  <span class="bn">BCZM<small>SOLUCIONES CONTABLES</small></span>
+  <span class="ttl"><b>Simulador de Régimen</b>NRUS · RER · RMT · General</span>
+</div></header>
+<div class="wrap">
+  <div class="card">
+    <h2>Datos del contribuyente</h2>
+    <div class="grid">
+      <div class="fld"><label>Empresa / Cliente</label><input id="emp" placeholder="Nombre o razón social"></div>
+      <div class="fld"><label>Tipo de contribuyente</label><select id="tipo"><option value="n">Persona natural / EIRL</option><option value="j">Persona jurídica (S.A.C., etc.)</option></select></div>
+      <div class="fld"><label>Ingresos netos anuales (S/)</label><input id="ing" type="number" value="180000"></div>
+      <div class="fld"><label>Costos y gastos anuales (S/)</label><input id="gas" type="number" value="120000"></div>
+      <div class="fld"><label>N° de trabajadores</label><input id="trab" type="number" value="3"></div>
+      <div class="fld"><label>Activos fijos (S/, sin predios/vehículos)</label><input id="act" type="number" value="30000"></div>
+      <div class="fld"><label>UIT vigente (S/)</label><input id="uit" type="number" value="5350"><div class="uit">Confirma la UIT del año en curso.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Comparativo de regímenes</h2>
+    <div style="overflow:auto"><table id="tbl"></table></div>
+    <div class="rec" id="rec"></div>
+    <div class="btns"><button class="act" onclick="pdf()">Descargar PDF</button></div>
+    <div class="note" id="notas"></div>
+  </div>
+  <div class="foot">BCZM Soluciones Contables S.A.C. · WhatsApp 934 760 023 · bczmerp-byte.github.io<br>Estimación referencial. Revisa los requisitos y tasas vigentes en SUNAT antes de decidir el régimen.</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const num=id=>{const v=parseFloat($(id).value);return isNaN(v)?0:v;};
+const fmt=x=>'S/ '+(x<0?'-':'')+Math.abs(x).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+let STATE=[];
+function calc(){
+  const tipo=$('tipo').value,ing=num('ing'),gas=num('gas'),trab=num('trab'),act=num('act'),uit=num('uit')||5350;
+  const util=Math.max(0,ing-gas);
+  const R=[];
+  // NRUS
+  (function(){
+    let ok=true,mot=[];
+    if(tipo!=='n'){ok=false;mot.push('solo persona natural/EIRL');}
+    if(ing>96000){ok=false;mot.push('ingresos > S/ 96,000/año');}
+    let ir=0,obs='';
+    if(ok){const mens=ing/12; if(mens<=5000){ir=20*12;obs='Categoría 1 · cuota S/ 20/mes';}else{ir=50*12;obs='Categoría 2 · cuota S/ 50/mes';}}
+    R.push({r:'NRUS',ok,ir,mot:ok?obs:('No: '+mot.join(', ')),nota:'No emite factura con IGV ni da crédito fiscal.'});
+  })();
+  // RER
+  (function(){
+    let ok=true,mot=[];
+    if(ing>525000){ok=false;mot.push('ingresos > S/ 525,000/año');}
+    if(act>126000){ok=false;mot.push('activos > S/ 126,000');}
+    if(trab>10){ok=false;mot.push('más de 10 trabajadores por turno');}
+    const ir=ing*0.015;
+    R.push({r:'RER',ok,ir,mot:ok?'Renta: 1.5% de ingresos netos (pago mensual definitivo)':'No: '+mot.join(', '),nota:'IGV 18%. No presenta Declaración Jurada anual.'});
+  })();
+  // RMT
+  (function(){
+    let ok=true,mot=[];
+    if(ing>1700*uit){ok=false;mot.push('ingresos > 1700 UIT');}
+    const t1=Math.min(util,15*uit)*0.10, t2=Math.max(0,util-15*uit)*0.295, ir=t1+t2;
+    R.push({r:'RMT',ok,ir,mot:ok?'Renta anual: 10% hasta 15 UIT de utilidad y 29.5% al exceso':'No: '+mot.join(', '),nota:'IGV 18%. Pago a cuenta 1% de ingresos (hasta 300 UIT).'});
+  })();
+  // GENERAL
+  (function(){
+    const ir=util*0.295;
+    R.push({r:'General',ok:true,ir,mot:'Renta anual: 29.5% de la utilidad',nota:'IGV 18%. Pago a cuenta 1.5% de ingresos o coeficiente. Sin límite de ingresos.'});
+  })();
+  // best = eligible with lowest ir
+  const elig=R.filter(x=>x.ok);let best=elig.reduce((a,b)=>b.ir<a.ir?b:a,elig[0]);
+  STATE={R,best,util,tipo,ing,gas,uit};
+  let h='<thead><tr><th>Régimen</th><th>¿Puede acogerse?</th><th class="n">Impuesto a la renta (anual aprox.)</th><th>Detalle</th></tr></thead><tbody>';
+  R.forEach(x=>{const isbest=x===best;h+=`<tr class="${isbest?'best':''}"><td><b>${x.r}</b>${isbest?'<span class="best-badge">MENOR IMPUESTO</span>':''}</td>
+    <td class="${x.ok?'yes':'no'}">${x.ok?'Sí':'No'}</td>
+    <td class="n">${x.ok?fmt(x.ir):'—'}</td>
+    <td>${x.mot}<br><span style="color:#8494a6;font-size:11.5px">${x.nota}</span></td></tr>`;});
+  h+='</tbody>';$('tbl').innerHTML=h;
+  $('rec').innerHTML=`<b>Utilidad estimada:</b> ${fmt(util)} &nbsp;·&nbsp; <b>Recomendación:</b> entre los regímenes a los que puede acogerse, el de menor impuesto es <b>${best.r}</b> (${fmt(best.ir)} al año). Considera también el IGV, la obligación de libros y si tus clientes necesitan factura.`;
+  $('notas').innerHTML='Límites usados: NRUS ≤ S/ 96,000; RER ≤ S/ 525,000, activos ≤ S/ 126,000, ≤ 10 trabajadores; RMT ≤ 1700 UIT. UIT = '+fmt(uit)+'. El impuesto del RMT y General se calcula sobre la utilidad (ingresos − gastos).';
+}
+function pdfHead(doc,titulo){
+  const W=doc.internal.pageSize.getWidth();
+  doc.setFillColor(17,35,61);doc.rect(0,0,W,70,'F');doc.setFillColor(224,165,38);doc.rect(0,70,W,4,'F');
+  doc.setFillColor(255,255,255);doc.roundedRect(30,16,40,40,6,6,'F');doc.setFillColor(224,165,38);doc.rect(38,27,24,4,'F');doc.setFillColor(255,255,255);doc.rect(49,27.5,4,22,'F');
+  doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(9);doc.text('BC',44,41,{align:'center'});doc.text('ZM',56,41,{align:'center'});
+  doc.setFontSize(16);doc.text('BCZM Soluciones Contables',84,34);doc.setFontSize(10);doc.setTextColor(224,183,74);doc.text(titulo.toUpperCase(),84,48);
+  doc.setTextColor(60,60,60);doc.setFont('helvetica','normal');doc.setFontSize(9.5);
+  const hoy=new Date().toLocaleDateString('es-PE');
+  doc.text(`Empresa / Cliente: ${$('emp').value||'—'}`,30,90);doc.text(`Fecha: ${hoy}`,W-30,90,{align:'right'});
+  return 108;
+}
+function pdf(){
+  const {jsPDF}=window.jspdf;const doc=new jsPDF({unit:'pt',format:'a4'});const W=doc.internal.pageSize.getWidth();
+  let y=pdfHead(doc,'Simulador de régimen tributario');
+  doc.setFontSize(10);doc.setTextColor(17,35,61);doc.setFont('helvetica','bold');
+  doc.text(`Ingresos: ${fmt(STATE.ing)}   Gastos: ${fmt(STATE.gas)}   Utilidad: ${fmt(STATE.util)}   UIT: ${fmt(STATE.uit)}`,30,y);y+=20;
+  // table
+  doc.setFont('helvetica','bold');doc.setFillColor(17,35,61);doc.setTextColor(255,255,255);doc.rect(30,y,W-60,22,'F');
+  doc.setFontSize(9.5);doc.text('Régimen',38,y+15);doc.text('¿Puede?',170,y+15);doc.text('IR anual aprox.',W-180,y+15);y+=22;
+  STATE.R.forEach(x=>{const best=x===STATE.best;doc.setFillColor(best?251:247,best?243:250,best?220:253);doc.rect(30,y,W-60,22,'F');
+    doc.setTextColor(17,35,61);doc.setFont('helvetica',best?'bold':'normal');doc.setFontSize(10);doc.text(x.r,38,y+15);
+    doc.setTextColor(...(x.ok?[27,127,90]:[178,59,59]));doc.text(x.ok?'Sí':'No',170,y+15);
+    doc.setTextColor(17,35,61);doc.text(x.ok?fmt(x.ir):'—',W-38,y+15,{align:'right'});y+=22;});
+  y+=14;doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(154,115,20);
+  doc.text(`Recomendado: ${STATE.best.r}  (${fmt(STATE.best.ir)} al año)`,30,y);
+  const H=doc.internal.pageSize.getHeight();doc.setDrawColor(219,226,234);doc.line(30,H-40,W-30,H-40);
+  doc.setFont('helvetica','normal');doc.setFontSize(8.5);doc.setTextColor(100,120,142);
+  doc.text('BCZM Soluciones Contables S.A.C. · WhatsApp 934 760 023 · bczm.erp@gmail.com · bczmerp-byte.github.io',W/2,H-26,{align:'center'});
+  doc.setFontSize(7.5);doc.setTextColor(150,160,172);doc.text('Estimación referencial. Revisa requisitos y tasas vigentes en SUNAT.',W/2,H-16,{align:'center'});
+  doc.save('Regimen_tributario_BCZM.pdf');
+}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>
